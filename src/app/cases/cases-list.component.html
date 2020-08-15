@@ -1,0 +1,141 @@
+<div class="container-fluid">
+            <div class="row" *ngIf='globalData'>
+                <div class="col-xl-3 col-md-3 mb-4">
+                    <div class="card border-left-info shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                        Total Cases
+                                    </div>
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col-auto">
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800 worldData">
+                                                {{globalData.cases| number:'1.0':'en-US'}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fa fa-users fa-2x text-info"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-3 mb-4">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                        Total Death
+                                    </div>
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col-auto">
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800 worldData">
+                                                {{globalData.deaths| number:'1.0':'en-US'}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fa fa-bed fa-2x text-danger"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-3 mb-4">
+                    <div class="card border-left-success shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                        Total Recovered
+                                    </div>
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col-auto">
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800 worldData">
+                                                {{globalData.recovered| number:'1.0':'en-US'}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fa fa-child fa-2x text-success"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-3 mb-4">
+                    <div class="card border-left-success shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                        Total Active Cases
+                                    </div>
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col-auto">
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800 worldData">
+                                                {{globalData.cases - globalData.recovered| number:'1.0':'en-US'}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fa fa-hospital-o fa-2x text-warning"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<div class="card bg-dark text-white">
+
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-auto">Search for: </div>
+			<div class="col-md-4">
+				<input class="form-control" type="text" placeholder="Search" aria-label="Search"
+					[(ngModel)]='listFilter'	/>
+			</div>
+		</div>
+
+		<div class="table-responsive">
+			<table class="table table-dark table-responsive-lg"
+					*ngIf='cases && cases.length'>
+				<thead>
+					<tr>
+						<th>Country</th>
+						<th>Total Cases	</th>
+						<th>New Cases	</th>
+						<th>Total Deaths	</th>
+						<th>New Deaths	</th>
+						<th>Total Recovered	</th>
+						<th>Active Cases</th>
+						<th>Total Tests</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr *ngFor='let case of filteredCases'>
+						<td>{{ case.country }}</td>
+						<td>{{ case.cases| number:'1.0':'en-US'}}</td>
+						<td>{{ case.todayCases | number:'1.0':'en-US'}}</td>
+						<td>{{ case.deaths| number:'1.0':'en-US'}}</td>
+						<td>{{ case.todayDeaths| number:'1.0':'en-US' }}</td>
+						<td>{{ case.recovered| number:'1.0':'en-US' }}</td>
+						<td>{{ case.active| number:'1.0':'en-US' }}</td>
+						<td>{{ case.totalTests| number:'1.0':'en-US' }}</td>
+					</tr>
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+</div>
